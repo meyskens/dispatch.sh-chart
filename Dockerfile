@@ -2,8 +2,8 @@ ARG ARCH
 ARG ARCHREPO
 FROM maartje/helmet-controller:${ARCH}-0.0.6 as controller
 
-ARG ARCHREPO
-FROM ${ARCHREPO}/alpine:edge
+ARG ARCH
+FROM multiarch/alpine:${ARCH}-edge
 
 RUN apk add --no-cache ca-certificates
 
