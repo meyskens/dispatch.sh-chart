@@ -1,4 +1,5 @@
 ARG ARCH
+ARG ARCHREPO
 FROM maartje/helmet-controller:${ARCH}-0.0.6 as controller
 
 ARG ARCHREPO
