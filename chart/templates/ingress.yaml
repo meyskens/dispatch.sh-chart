@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: {{ template "dispatch.fullname" . }}
+  labels:
+{{ include "dispatch.labels" . | indent 4 }}
+spec:
+  rules:
+    - host: {{ .Values.domain }}
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: {{ template "dispatch.fullname" . }}
+              servicePort: 80
+    - host: www.{{ .Values.domain }}
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: {{ template "dispatch.fullname" . }}
+              servicePort: 80

@@ -1,0 +1,9 @@
+
+---
+domain: ""
+altDomains: []
+mongo: false
+mysql: false
+postgres: false
+image: ""
+replicas: 1

@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "dispatch.fullname" . }}
+  labels:
+{{ include "dispatch.labels" . | indent 4 }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: {{ template "dispatch.name" . }}-app
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+{{ include "dispatch.labels" . | indent 8 }}
+    spec:
+      imagePullSecrets:
+        - name: harbor
+      containers:
+        - name: {{ .Release.Name }}
+          image: "{{ .Values.image }}"
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /health_check
+              port: http
+            periodSeconds: 20
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /health_check
+              port: http
+            periodSeconds: 20
+            timeoutSeconds: 5
