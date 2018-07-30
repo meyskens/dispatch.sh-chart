@@ -24,15 +24,3 @@ spec:
             - name: http
               containerPort: 80
               protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /health_check
-              port: http
-            periodSeconds: 20
-            timeoutSeconds: 5
-          readinessProbe:
-            httpGet:
-              path: /health_check
-              port: http
-            periodSeconds: 20
-            timeoutSeconds: 5
