@@ -8,8 +8,7 @@ spec:
   replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
-      app: {{ template "dispatch.name" . }}-app
-      release: {{ .Release.Name }}
+{{ include "dispatch.labels" . | indent 6 }}
   template:
     metadata:
       labels:
