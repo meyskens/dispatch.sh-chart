@@ -11,5 +11,4 @@ spec:
       targetPort: 80
       protocol: TCP
   selector:
-    app: {{ template "dispatch.name" . }}-app
-    release: {{ .Release.Name }}
+{{ include "dispatch.labels" . | indent 4 }}
