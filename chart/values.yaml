@@ -7,3 +7,7 @@ mysql: false
 postgres: false
 image: ""
 replicas: 1
+secrets: []
+#  - name: test
+#    path: /tmp/test
+#    value: SSBhbSBhIHN1cGVyIHNlY3JldCBmaWxlCg==

@@ -1,3 +1,4 @@
+{{- $root := . }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -16,10 +17,27 @@ spec:
     spec:
       imagePullSecrets:
         - name: harbor
+       {{- if .Values.secrets }}
+      volumes:
+       {{- range $secret :=  .Values.secrets }}
+        - name: {{ $secret.name }}
+          secret:
+            secretName: {{ template "dispatch.fullname" $root }}-{{ $secret.name }}
+      {{- end }}
+      {{- end }}
       containers:
         - name: {{ .Release.Name }}
           image: "{{ .Values.image }}"
           imagePullPolicy: Always
+          {{- if .Values.secrets }}
+          volumeMounts:
+          {{- range $secret := .Values.secrets }}
+            - name: {{ $secret.name }}
+              mountPath: {{ $secret.path }}
+              readOnly: true
+              subPath: file
+          {{- end }}
+          {{- end }}
           ports:
             - name: http
               containerPort: 80
