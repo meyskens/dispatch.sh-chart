@@ -11,3 +11,6 @@ secrets: []
 #  - name: test
 #    path: /tmp/test
 #    value: SSBhbSBhIHN1cGVyIHNlY3JldCBmaWxlCg==
+envvars: []
+#  - key: test
+#    value: test
