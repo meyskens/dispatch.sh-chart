@@ -1,6 +1,6 @@
 ARG ARCH
 ARG ARCHREPO
-FROM maartje/helmet-controller:${ARCH}-0.0.8 as controller
+FROM maartje/helmet-controller:${ARCH}-0.0.9 as controller
 
 ARG ARCH
 FROM multiarch/alpine:${ARCH}-edge
