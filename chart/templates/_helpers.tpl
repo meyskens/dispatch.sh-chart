@@ -15,6 +15,13 @@ release: {{ .Release.Name | quote }}
 heritage: {{ .Release.Service | quote }}
 {{- end -}}
 
+{{- define "dispatch.labels.noapp" -}}
+chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+release: {{ .Release.Name | quote }}
+heritage: {{ .Release.Service | quote }}
+{{- end -}}
+
+
 {{- define "dispatch.selector" -}}
 app: {{ template "dispatch.name" . }}
 release: {{ .Release.Name }}

@@ -2,9 +2,14 @@
 ---
 domain: ""
 altDomains: []
-mongo: false
-mysql: false
-postgres: false
+mongodb: 
+  enabled: false
+mariadb: 
+  enabled: false
+postgresql: 
+  enabled: false
+redis: 
+  enabled: false
 image: ""
 replicas: 1
 secrets: []

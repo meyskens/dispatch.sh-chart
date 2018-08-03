@@ -1,0 +1,36 @@
+{{- if .Values.redis.enabled }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-redis
+spec:
+  selector:
+    app: redis
+{{ include "dispatch.labels.noapp" . | indent 4 }}
+  ports:
+    - name: redis
+      port: 6379
+      targetPort: 6379
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "dispatch.fullname" . }}-
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: redis
+{{ include "dispatch.labels.noapp" . | indent 8 }}
+    spec:
+      containers:
+        - name: redis
+          imagePullPolicy: Always
+          image: redis
+          volumeMounts:
+          ports:
+            - containerPort: 6379
+
+{{ end }}
