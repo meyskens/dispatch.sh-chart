@@ -1,3 +1,4 @@
+---
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
@@ -20,3 +21,20 @@ spec:
             backend:
               serviceName: {{ template "dispatch.fullname" . }}
               servicePort: 80
+{{- $root := . }}
+{{- range $domain := .Values.altdomains }}
+    - host: {{ domain }}
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: {{ template "dispatch.fullname" $root }}
+              servicePort: 80
+    - host: www.{{ domain }}
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: {{ template "dispatch.fullname" $root }}
+              servicePort: 80
+{{- end }}
