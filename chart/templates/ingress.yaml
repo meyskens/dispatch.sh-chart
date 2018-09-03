@@ -23,14 +23,14 @@ spec:
               servicePort: 80
 {{- $root := . }}
 {{- range $domain := .Values.altdomains }}
-    - host: {{ domain }}
+    - host: {{ $domain }}
       http:
         paths:
           - path: /
             backend:
               serviceName: {{ template "dispatch.fullname" $root }}
               servicePort: 80
-    - host: www.{{ domain }}
+    - host: www.{{ $domain }}
       http:
         paths:
           - path: /
