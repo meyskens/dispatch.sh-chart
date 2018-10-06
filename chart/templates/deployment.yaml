@@ -17,7 +17,7 @@ spec:
         updated: "{{ .Values.time }}"
     spec:
       imagePullSecrets:
-        - name: harbor
+        - name: registry
        {{- if .Values.secrets }}
       volumes:
        {{- range $secret :=  .Values.secrets }}
