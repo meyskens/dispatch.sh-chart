@@ -5,7 +5,18 @@ metadata:
   name: {{ template "dispatch.fullname" . }}
   labels:
 {{ include "dispatch.labels" . | indent 4 }}
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    certmanager.k8s.io/cluster-issuer: letsencrypt-prod
 spec:
+  tls:
+  - hosts:
+      - {{ .Values.domain }}
+      - www.{{ .Values.domain }}
+      {{- range $domain := .Values.altdomains }}
+      - {{ $domain }}
+      {{- end }}
+    secretName: {{ template "dispatch.fullname" . }}
   rules:
     - host: {{ .Values.domain }}
       http:
