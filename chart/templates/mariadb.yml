@@ -1,32 +1,16 @@
 {{- if .Values.mariadb.enabled }}
 ---
 apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name:  {{ template "dispatch.fullname" . }}-mariadb
-spec:
-  capacity:
-    storage: 1Gi 
-  accessModes:
-    - ReadWriteMany
-  mountOptions:
-    - hardkp
-    - nfsvers=4.1
-  nfs:
-      path: /mnt/nfs/{{ .Release.Name }}-mariadb
-      server: 10.244.0.1
----
-apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name:  {{ template "dispatch.fullname" . }}-mariadb
 spec:
   accessModes:
-    - ReadWriteMany
+  - ReadWriteOnce
   resources:
     requests:
-      storage: 1Gi
-  volumeName:  {{ template "dispatch.fullname" . }}-mariadb
+      storage: 5Gi
+  storageClassName: do-block-storage
 ---
 apiVersion: v1
 kind: Service
