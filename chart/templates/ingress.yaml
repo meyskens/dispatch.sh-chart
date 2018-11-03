@@ -12,7 +12,7 @@ spec:
   tls:
   - hosts:
       - {{ .Values.domain }}
-      {{- range $domain := .Values.altdomains }}
+      {{- range $domain := .Values.altDomains }}
       - {{ $domain }}
       {{- end }}
     secretName: {{ template "dispatch.fullname" . }}
@@ -25,7 +25,7 @@ spec:
               serviceName: {{ template "dispatch.fullname" . }}
               servicePort: 80
 {{- $root := . }}
-{{- range $domain := .Values.altdomains }}
+{{- range $domain := .Values.altDomains }}
     - host: {{ $domain }}
       http:
         paths:
