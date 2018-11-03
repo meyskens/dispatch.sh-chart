@@ -33,11 +33,4 @@ spec:
             backend:
               serviceName: {{ template "dispatch.fullname" $root }}
               servicePort: 80
-    - host: www.{{ $domain }}
-      http:
-        paths:
-          - path: /
-            backend:
-              serviceName: {{ template "dispatch.fullname" $root }}
-              servicePort: 80
 {{- end }}
