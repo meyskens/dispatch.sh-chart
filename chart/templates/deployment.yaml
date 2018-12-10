@@ -30,13 +30,13 @@ spec:
         - name: {{ .Release.Name }}
           image: "{{ .Values.image }}"
           imagePullPolicy: Always
-          {{- if .Values.secrets }}
+          {{- if .Values.envvars }}
           env:
             {{- range $envvar := .Values.envvars }}
             - name: {{ $envvar.key | quote }}
               value: {{ $envvar.value | quote }}
-            {{end}}
-          {{ end }}
+            {{- end }}
+          {{- end }}
           {{- if .Values.secrets }}
           volumeMounts:
           {{- range $secret := .Values.secrets }}
