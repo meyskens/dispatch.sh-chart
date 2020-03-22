@@ -2,6 +2,7 @@
 ---
 domain: ""
 altDomains: []
+forceHTTPS: true
 mongodb: 
   enabled: false
 mariadb: 
