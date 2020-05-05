@@ -16,6 +16,16 @@ spec:
 {{ include "dispatch.labels" . | indent 8 }}
         updated: "{{ .Values.time }}"
     spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: release
+                operator: In
+                values:
+                - {{ .Release.Name | quote }}
+            topologyKey: "kubernetes.io/hostname"
       imagePullSecrets:
         - name: registry
        {{- if .Values.secrets }}
