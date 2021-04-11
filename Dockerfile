@@ -1,9 +1,6 @@
-ARG ARCH
-ARG ARCHREPO
-FROM maartje/helmet-controller:${ARCH}-0.0.13 as controller
+FROM ghcr.io/meyskens/helmet-controller:0.0.18 as controller
 
-ARG ARCH
-FROM multiarch/alpine:${ARCH}-edge
+FROM alpine:3.13
 
 RUN apk add --no-cache ca-certificates
 
