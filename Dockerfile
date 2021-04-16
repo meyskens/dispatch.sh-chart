@@ -1,4 +1,4 @@
-FROM ghcr.io/meyskens/helmet-controller:0.0.19 as controller
+FROM ghcr.io/meyskens/helmet-controller:0.0.20 as controller
 
 FROM alpine:3.13
 
